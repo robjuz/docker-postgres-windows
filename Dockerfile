@@ -16,6 +16,10 @@ ENV EDB_REPO https://get.enterprisedb.com/postgresql
 ##### Use PowerShell for the installation
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
+# Enable long paths.
+# See more here: https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=powershell#enable-long-paths-in-windows-10-version-1607-and-later.
+RUN New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force ;
+
 ### Download EnterpriseDB and remove cruft
 RUN $URL1 = $('{0}/postgresql-{1}-windows-x64-binaries.zip' -f $env:EDB_REPO,$env:EDB_VER) ; \
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 ; \
@@ -60,6 +64,7 @@ RUN if (Test-Path 'C:\\windows\\system32\\msvcp120.dll') { \
     } else { \
         Write-Host('Visual C++ 2017 Redistributable Package') ; \
         Copy-Item 'C:\\windows\\system32\\vcruntime140.dll' -Destination 'C:\\pgsql\\bin\\vcruntime140.dll' ; \
+        Copy-Item 'C:\\windows\\system32\\msvcp140.dll' -Destination 'C:\\pgsql\\bin\\msvcp140.dll' ; \
     }
 
 ####
@@ -80,6 +85,8 @@ ENV PGDATA "C:\\pgsql\\data"
 
 COPY docker-entrypoint.cmd /
 ENTRYPOINT ["C:\\docker-entrypoint.cmd"]
+
+VOLUME "C:\\pgsql\\data"
 
 EXPOSE 5432
 CMD ["postgres"]

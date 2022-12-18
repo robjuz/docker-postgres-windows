@@ -6,15 +6,27 @@ If anyone still has a use case for this kind of container image I recommend to r
 
 ## Supported tags and `Dockerfile` links
 
--   [`12.0`, `12`, `latest` (12/Dockerfile)](https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile)
--   [`11.5`, `11` (11/Dockerfile)](https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile)
--   [`10.10`, `10` (10/Dockerfile)](https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile)
--   [`9.6.15`, `9.6` (9.6/Dockerfile)](https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile)
--   [`9.5.19`, `9.5` (9.5/Dockerfile)](https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile)
--   [`9.4.24`, `9.4` (9.4/Dockerfile)](https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile)
+-   [`15.1`,  `15`, `latest` (15/Dockerfile)](https://github.com/robjuz/docker-postgres-windows/blob/master/Dockerfile)
+-   [`14.13`, `14`   (14/Dockerfile)](https://github.com/robjuz/docker-postgres-windows/blob/master/Dockerfile)
+-   [`13.9`,  `13`   (13/Dockerfile)](https://github.com/robjuz/docker-postgres-windows/blob/master/Dockerfile)
+
+[//]: # (-   [`12.13`, `12`   &#40;12/Dockerfile&#41;]&#40;https://github.com/robjuz/docker-postgres-windows/blob/master/Dockerfile&#41;)
+
+[//]: # (-   [`11.18`, `11`   &#40;11/Dockerfile&#41;]&#40;https://github.com/robjuz/docker-postgres-windows/blob/master/Dockerfile&#41;)
+
+[//]: # (-   [`10.23`, `10`   &#40;10/Dockerfile&#41;]&#40;https://github.com/robjuz/docker-postgres-windows/blob/master/Dockerfile&#41;)
+
+[//]: # (-   [`9.6.24`, `9.6` &#40;9.6/Dockerfile&#41;]&#40;https://github.com/robjuz/docker-postgres-windows/blob/master/Dockerfile&#41;)
+
+[//]: # (-   [`9.5.25`, `9.5` &#40;9.5/Dockerfile&#41;]&#40;https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile&#41;)
+
+[//]: # (-   [`9.4.26`, `9.4` &#40;9.4/Dockerfile&#41;]&#40;https://github.com/stellirin/docker-postgres-windows/blob/master/Dockerfile&#41;)
 
 The above tags are manifest tags that consist of a set builds based on all available `nanoserver` releases, specifically:
 
+- `nanoserver:ltsc2022`
+- `nanoserver:20H2`
+- `nanoserver:2004`
 - `nanoserver:1909`
 - `nanoserver:1903`
 - `nanoserver:1809`
@@ -30,10 +42,10 @@ Your Docker client should pull down the correct image.
     [the Docker Community Forums](https://forums.docker.com/), [the Docker Community Slack](https://blog.docker.com/2016/11/introducing-docker-community-directory-docker-community-slack/), or [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=docker)
 
 -   **Where to file issues**:
-    [https://github.com/stellirin/docker-postgres-windows/issues](https://github.com/stellirin/docker-postgres-windows/issues)
+    [https://github.com/robjuz/docker-postgres-windows/issues](https://github.com/robjuz/docker-postgres-windows/issues)
 
 -   **Maintained by**:
-    [Stellirin](https://github.com/stellirin)
+    [robjuz](https://github.com/robjuz)
 
 -   **Supported architectures**: ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64))
     [`windows-amd64`](https://hub.docker.com/u/winamd64/)
@@ -45,7 +57,7 @@ Your Docker client should pull down the correct image.
 ## How to use this image
 
 ```console
-$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d stellirin/postgres-windows
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d robjuz/postgres-windows
 ```
 
 This image includes `EXPOSE 5432` (the postgres port), so standard container linking will make it automatically available to the linked containers. The default `postgres` user and database are created in the entrypoint with `initdb`.
